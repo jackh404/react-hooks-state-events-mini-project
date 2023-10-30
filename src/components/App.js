@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
@@ -8,15 +8,15 @@ import { CATEGORIES, TASKS } from "../data";
 // console.log("Here's the data you're working with");
 // console.log({ CATEGORIES, TASKS });
 
+const allTasks = TASKS.map(task => ({ ...task, key: uuidv4() }));
 function App() {
-  let index = 0;
-  const allTasks = TASKS.map(task => ({ ...task, key: uuidv4() }));
+  const [tasks, setTasks] = useState(allTasks);
   return (
     <div className="App">
       <h2>My tasks</h2>
       <CategoryFilter />
       <NewTaskForm />
-      <TaskList allTasks={allTasks} />
+      <TaskList allTasks={tasks} setTasks={setTasks} />
     </div>
   );
 }
