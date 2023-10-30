@@ -11,12 +11,21 @@ import { CATEGORIES, TASKS } from "../data";
 const allTasks = TASKS.map(task => ({ ...task, key: uuidv4() }));
 function App() {
   const [tasks, setTasks] = useState(allTasks);
+  const [selectedCategory, setSelectedCategory] = useState("");
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter categories={CATEGORIES} />
+      <CategoryFilter
+        categories={CATEGORIES}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
       <NewTaskForm />
-      <TaskList allTasks={tasks} setTasks={setTasks} />
+      <TaskList
+        allTasks={tasks}
+        setTasks={setTasks}
+        selectedCategory={selectedCategory}
+      />
     </div>
   );
 }
