@@ -12,6 +12,9 @@ const allTasks = TASKS.map(task => ({ ...task, key: uuidv4() }));
 function App() {
   const [tasks, setTasks] = useState(allTasks);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const onTaskFormSubmit = newTask => {
+    setTasks([...tasks, { ...newTask, key: uuidv4() }]);
+  };
   return (
     <div className="App">
       <h2>My tasks</h2>
@@ -20,7 +23,10 @@ function App() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
       />
-      <NewTaskForm />
+      <NewTaskForm
+        categories={CATEGORIES}
+        onTaskFormSubmit={onTaskFormSubmit}
+      />
       <TaskList
         allTasks={tasks}
         setTasks={setTasks}
